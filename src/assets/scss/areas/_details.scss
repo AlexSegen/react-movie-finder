@@ -1,0 +1,100 @@
+.content {
+    &__details { 
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .details_body {
+            padding: 15px 55px 15px 15px;
+            width: 100%;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            background: #fff;
+            box-shadow: 0 15px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+
+            &-title {
+                font-size: 1.5rem;
+                line-height: 1.6rem;
+                font-weight: 700;
+                color: #010101;
+                letter-spacing: -1px;
+                margin: 0 0 5px;
+                small {
+                    color: #999;
+                    font-size: .9rem;
+                    font-weight: 400;
+                }
+            }
+
+            &-rating {
+                padding: 0;
+                margin: 0 0 15px;
+                > li {
+                    font-size: .8rem;
+                    color: #333;
+                    display: inline-block;
+                    margin-right: 5px;
+                }
+            }
+
+            &-scores {
+                z-index: 1;
+                position: absolute;
+                right: 5px;
+                top: -25px;
+                display: flex;
+                padding: 10px;
+
+                .score {
+                    background: #42e7eb;
+                    color: #111;
+                    font-size: 2rem;
+                    line-height: 2rem;
+                    font-weight: 800;
+                    letter-spacing: -1px;
+                    margin: 5px;
+                    border-radius: 5px;
+                    width: 50px;
+                    text-align: center;
+                    span {
+                        display: block;
+                        margin: 5px 0;
+                        opacity: .7;
+                        font-weight: 300;
+                        font-size: .9rem;
+                        line-height: .9rem;
+                    }
+                }
+            }
+
+            &-awards {
+                margin: 20px 0;
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .icon {
+                    font-size: 2.5rem;
+                    margin-right: 20px;
+                }
+                span {
+                    color: #999;
+                    display: block;
+                }
+            }
+        }
+
+        .details_media {
+            max-width: 300px;
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+                border-radius: 5px;
+
+            }
+        }
+    }
+}

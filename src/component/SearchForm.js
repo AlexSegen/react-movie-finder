@@ -22,7 +22,6 @@ export class SearchForm extends Component {
         this.setState({ isLoading : true})
         dataService.searchMovies(this.state.inputMovie.trim()).then(data => {
             const { Search = [], totalResults = ""} = data;
-            console.log({ Search, totalResults})
             this.props.onResults({Search, totalResults})
             this.setState({ isLoading : false})
         }).catch(error => {
