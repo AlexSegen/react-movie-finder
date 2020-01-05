@@ -1,3 +1,9 @@
+# Movie Finder
+
+Example app to find Movies Information using ReactJS.
+
+![Movie Finder](https://github.com/AlexSegen/movie-finder/blob/master/splash.png?raw=true)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
