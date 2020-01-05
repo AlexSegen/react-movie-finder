@@ -1,0 +1,141 @@
+body {
+  color: #010101;
+  font-size: 1rem;
+  background: #f6f8ff;
+  font-family: $font-family;
+  min-height: 100vh;
+  padding: 50px 0;
+  @media(max-width:767px) {
+    padding: 20px 0;
+  }
+}
+
+.app-name {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 0 0 30px;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+}
+
+.MoviesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 80px 15px 15px 15px;
+
+  &-item {
+    width: 22.5%;
+    margin-bottom: 75px;
+
+    @media (max-width: 767px) {
+      width: 33%;
+    }
+
+    @media (max-width: 650px) {
+      width: 45%;
+    }
+
+    @media (max-width: 420px) {
+      width: 90%;
+    }
+  }
+}
+
+.card {
+  &.card-movie {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    min-height: 250px;
+    box-shadow: none;
+    transition: all ease-in-out 0.2s;
+    .title {
+      font-size: 0.7rem;
+      min-height: 40px;
+    }
+    .subtitle {
+      font-size: 0.5rem;
+    }
+
+    &:hover,
+    &:focus {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.05);
+    }
+
+    .card-image {
+      height: 160px;
+      background: #f6f8ff;
+    }
+
+    .image {
+      img {
+        width: auto;
+        display: block;
+        margin: 0 auto;
+        transform: translateY(-50px);
+        border-radius: 5px;
+        box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.03);
+        max-height: 200px;
+      }
+    }
+  }
+
+  &-content {
+    padding: 1rem;
+  }
+}
+
+.content {
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 15px;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-align: center;
+    padding: 20px 0;
+  }
+  &__area {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position-x: 140px;
+    background-size: 100%;
+    background-image: url(https://preview.cruip.com/blue/images/illustration-section-01.svg);
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 12px 12px rgba($color: #000000, $alpha: 0.03);
+  }
+
+  &__message {
+    font-size: 0.7rem;
+    color: #666;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  &__results {
+    min-height: 600px;
+  }
+
+  &__no-results {
+    color: #999;
+    font-size: 1.2rem;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 15px;
+    text-align: center;
+  }
+}
