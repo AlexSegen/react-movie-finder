@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-
-const API_KEY = "a4766de2"
-
-const API_URL = "http://www.omdbapi.com"
+import dataService from '../services/data.service'
 
 export class SearchForm extends Component {
     state = {
@@ -19,14 +16,11 @@ export class SearchForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        if(!this.state.inputMovie)
+        if(!this.state.inputMovie || this.state.inputMovie.toString().trim().length === 0)
             return
 
         this.setState({ isLoading : true})
-
-        fetch(`${API_URL}/?apikey=${API_KEY}&s=${this.state.inputMovie}`)
-        .then(res => res.json())
-        .then(data => {
+        dataService.searchMovies(this.state.inputMovie.trim()).then(data => {
             const { Search = [], totalResults = ""} = data;
             console.log({ Search, totalResults})
             this.props.onResults({Search, totalResults})
