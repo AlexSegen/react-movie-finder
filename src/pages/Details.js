@@ -40,11 +40,11 @@ export class Details extends Component {
         const { movie } = this.state
         return ( 
             <div className="content__details">
-                <div className="details_media">
+                <div className="details_media roll-in-blurred-left">
                     <img src={movie.Poster} className="media_photo" alt={movie.Title}/>
                 </div>
-                <div className="details_body">
-                    <div className="details_body-scores">
+                <div className="details_body fade-in-top">
+                    <div className="details_body-scores jello-horizontal">
                         <div className="score">
                             {movie.Metascore}
                             <span>Score</span>

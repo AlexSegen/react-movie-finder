@@ -4,6 +4,10 @@
         justify-content: flex-start;
         align-items: center;
 
+        @media(max-width: 600px) {
+            display: block;
+        }
+
         .details_body {
             padding: 15px 55px 15px 15px;
             width: 100%;
@@ -44,7 +48,11 @@
                 right: 5px;
                 top: -25px;
                 display: flex;
-                padding: 10px;
+
+                @media(max-width: 600px) {
+                    position: relative;
+                    top: 0;
+                }
 
                 .score {
                     background: #42e7eb;
