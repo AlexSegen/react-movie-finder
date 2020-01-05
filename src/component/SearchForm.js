@@ -6,7 +6,7 @@ export class SearchForm extends Component {
     state = {
         inputMovie : '',
         isLoading: false,
-        isError : false
+        hasErrors : false
     }
 
     handleChange = (e) => {
@@ -19,14 +19,14 @@ export class SearchForm extends Component {
         if(!this.state.inputMovie || this.state.inputMovie.toString().trim().length === 0)
             return
 
-        this.setState({ isLoading : true})
+        this.setState({ isLoading : true, hasErrors: false})
         dataService.searchMovies(this.state.inputMovie.trim()).then(data => {
             const { Search = [], totalResults = ""} = data;
             this.props.onResults({Search, totalResults})
             this.setState({ isLoading : false})
         }).catch(error => {
             console.log('Error: ', error)
-            this.setState({ isLoading : false, isError: true})
+            this.setState({ isLoading : false, hasErrors: true})
         })
 
     }

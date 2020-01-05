@@ -1,4 +1,4 @@
-const API_URL = "http://www.omdbapi.com"
+const API_URL = "https://www.omdbapi.com"
 const API_KEY = "a4766de2"
 
 export default {
