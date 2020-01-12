@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Demo
 
-Check out demo app at [Create React App](https://moviefinder-app.netlify.com/).
+Check out demo app at [Netlify](https://moviefinder-app.netlify.com/).
 
 
 
