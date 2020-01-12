@@ -44,6 +44,15 @@ export const Details = props => {
                         <span>Score</span>
                     </div>
                 </div>
+
+                {
+                    hasErrors ? <div className="field message is-danger">
+                        <div className="message-body has-text-centered">
+                            Oops, please try again!
+                                        </div>
+                    </div> : null
+                }
+
                 <h2 className="details_body-title">{movie.Title} <br />
                     <small> Genre: {movie.Genre} | Year: {movie.Year}</small></h2>
                 {
