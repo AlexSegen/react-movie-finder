@@ -6,6 +6,13 @@ Example app to find Movies Information using ReactJS.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+### Demo
+
+Check out demo app at [Create React App](https://moviefinder-app.netlify.com/).
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
