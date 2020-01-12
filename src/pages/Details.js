@@ -1,59 +1,53 @@
-import React, { Component } from 'react';
-import {PropTypes} from 'prop-types'
-
+/* eslint-disable no-const-assign */
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-
 import dataService from '../services/data.service'
 
-export class Details extends Component {
-    state = {
-        movie: {},
-        isLoading: false,
-        hasErrors: false
-    }
+export const Details = props => {
 
-    static propTypes = {
-        match: PropTypes.shape({
-            params: PropTypes.object,
-            isExact: PropTypes.bool,
-            path: PropTypes.string,
-            url: PropTypes.string
-        })
-    }
+    const [movie, setMovie] = useState({});
+    // eslint-disable-next-line no-unused-vars
+    const [isLoading, setLoading] = useState(false);
+    // eslint-disable-next-line no-unused-vars
+    const [hasErrors, setErrors] = useState(false);
 
-    componentDidMount() {
-        const { id } = this.props.match.params
-        this.getMovieDetails(id)
-    }
-
-    getMovieDetails = id => {
-        this.setState({ isLoading : true})
-        dataService.getMovie(id).then(movie => {
-            this.setState({ movie, isLoading : false, hasErrors: false})
+    const getMovieDetails = id => {
+        setLoading(true)
+        setErrors(false)
+        dataService.getMovie(id).then(res => {
+            setMovie(res)
+            setLoading(false)
         }).catch(error => {
             console.log('Error: ', error)
-            this.setState({ isLoading : false, hasErrors: true})
+            setLoading(false)
+            setErrors(true)
         })
     }
 
-    render() { 
-        const { movie } = this.state
-        return ( 
-            <div className="content__details">
-                <div className="details_media roll-in-blurred-left">
-                    <img src={movie.Poster} className="media_photo" alt={movie.Title}/>
-                </div>
-                <div className="details_body fade-in-top">
-                    <div className="details_body-scores jello-horizontal">
-                        <div className="score">
-                            {movie.Metascore}
-                            <span>Score</span>
-                        </div>
+    useEffect(() => {
+        getMovieDetails(props.match.params.id);
+
+        return () => {
+
+        };
+    }, [props.match.params.id]);
+
+    return (
+        <div className="content__details">
+            <div className="details_media roll-in-blurred-left">
+                <img src={movie.Poster} className="media_photo" alt={movie.Title} />
+            </div>
+            <div className="details_body fade-in-top">
+                <div className="details_body-scores jello-horizontal">
+                    <div className="score">
+                        {movie.Metascore}
+                        <span>Score</span>
                     </div>
-                    <h2 className="details_body-title">{movie.Title} <br/>
+                </div>
+                <h2 className="details_body-title">{movie.Title} <br />
                     <small> Genre: {movie.Genre} | Year: {movie.Year}</small></h2>
-                    {
-                        movie.Ratings ?
+                {
+                    movie.Ratings ?
                         <ul className="details_body-rating">
                             {
                                 movie.Ratings.map(r => {
@@ -61,17 +55,16 @@ export class Details extends Component {
                                 })
                             }
                         </ul> : null
-                    }
-                    <p className="details_body-plot">{movie.Plot}</p>
-                    <div className="details_body-awards">
-                        <i className="fa fa-trophy has-text-warning icon"></i> <span>{movie.Awards}</span>
-                    </div>
-                    <hr/>
-                    <Link to="/" className="button is-default" >Go back</Link>
+                }
+                <p className="details_body-plot">{movie.Plot}</p>
+                <div className="details_body-awards">
+                    <i className="fa fa-trophy has-text-warning icon"></i> <span>{movie.Awards}</span>
                 </div>
-     
+                <hr />
+                <Link to="/" className="button is-default" >Go back</Link>
             </div>
-         );
-    }
-}
- 
+
+        </div>
+    );
+
+};

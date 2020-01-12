@@ -9,11 +9,11 @@ export class SearchForm extends Component {
         hasErrors : false
     }
 
-    handleChange = (e) => {
+    handleChange = e => {
         this.setState({ inputMovie : e.target.value})
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault()
 
         if(!this.state.inputMovie || this.state.inputMovie.toString().trim().length === 0)
