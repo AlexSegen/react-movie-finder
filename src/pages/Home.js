@@ -2,22 +2,30 @@ import React, { useState } from 'react';
 import { SearchForm } from '../component/SearchForm'
 import { MoviesList } from '../component/MoviesList'
 import { NotFound } from '../component/NotFound'
+import { Pagination } from '../component/Pagination'
 
 export const Home = () => {
 
   const [usedSearch, setUsedSearch] = useState(false);
   const [results, setResults] = useState([]);
+  const [inputMovie, setInputMovie] = useState("");
   const [totalResults, setTotalResults] = useState(0);
 
   const handleResults = data => {
     setResults(data.Search);
     setUsedSearch(true);
-    setTotalResults(data.totalResults)
+    setInputMovie(data.inputMovie);
+    setTotalResults(data.totalResults);
   }
 
   const renderResults = () => {
     return results && results.length === 0 ?
-      <NotFound /> : <MoviesList movies={results} totalResults={totalResults} />
+      <NotFound /> :
+      <div>
+        <MoviesList movies={results} totalResults={totalResults} inputMovie={inputMovie} />
+        <hr/>
+        <Pagination totalResults={totalResults} inputMovie={inputMovie} onResults={handleResults}/>
+      </div> 
   }
 
   return (

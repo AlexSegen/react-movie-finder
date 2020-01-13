@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export const Movie = props => {
 
 
-    const { id, title, poster, year } = props
+    const { id, title, poster, year } = props;
 
     return (
         <Link to={`/details/${id}`}
