@@ -22,7 +22,7 @@ export const SearchForm = props => {
 
         dataService.searchMovies(inputMovie.trim()).then(data => {
             const { Search = [], totalResults = "" } = data;
-            props.onResults({ Search, totalResults })
+            props.onResults({ Search, totalResults, inputMovie })
             setLoading(false)
         }).catch(error => {
             console.log('Error: ', error)

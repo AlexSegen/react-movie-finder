@@ -1,5 +1,6 @@
 import React from 'react';
 import { Movie } from './Movie'
+import { Pagination } from './Pagination'
 
 export const MoviesList = props => {
 
@@ -23,21 +24,8 @@ export const MoviesList = props => {
                     }
 
                 </div>
-                {/* <nav className="pagination" role="navigation" aria-label="pagination">
-                    <button className="pagination-previous" title="This is the first page" disabled>Previous</button>
-                    <button className="pagination-next">Next page</button>
-                    <ul className="pagination-list">
-                        <li>
-                        <button className="pagination-link is-current" aria-label="Page 1" aria-current="page">1</button>
-                        </li>
-                        <li>
-                        <button className="pagination-link" aria-label="Goto page 2">2</button>
-                        </li>
-                        <li>
-                        <button className="pagination-link" aria-label="Goto page 3">3</button>
-                        </li>
-                    </ul>
-                </nav> */}
+                {/* <hr/>
+                <Pagination resultCount={totalResults} /> */}
             </div>
         )
 
