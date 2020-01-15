@@ -7,6 +7,10 @@ export const SearchForm = props => {
     const [isLoading, setLoading] = useState(false);
     const [hasErrors, setErrors] = useState(false);
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const search = urlParams.get('s');
+    const page = urlParams.get('page');
+
     const handleChange = e => {
         setInputMovie(e.target.value)
     }
@@ -15,17 +19,14 @@ export const SearchForm = props => {
         e.preventDefault()
         if (!inputMovie || inputMovie.toString().trim().length === 0)
             return
-        window.location.href = "/?s=" + inputMovie;
+        window.location.href = "/?s=" + inputMovie + "&page=" + (page ? page : 1);
     }
 
     const searchMovie = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const search = urlParams.get('s');
-        const page = urlParams.get('page');
         if (search) {
             setLoading(true)
             setErrors(false)
-            dataService.searchMovies(search.trim(), page).then(data => {
+            dataService.searchMovies(search.trim(), page ? page : 1).then(data => {
                 const { Search = [], totalResults = "" } = data;
                 props.onResults({ Search, totalResults, inputMovie: search })
                 setLoading(false)
@@ -40,6 +41,7 @@ export const SearchForm = props => {
 
     useEffect(() => {
         searchMovie()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

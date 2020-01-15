@@ -1,9 +1,8 @@
 import React from 'react';
 import { Movie } from './Movie'
 
-export const MoviesList = props => {
+export const MoviesList = ({ movies, totalResults, inputMovie }) => {
 
-        const { movies, totalResults, inputMovie } = props;
         return (
             <div className="content__result-row">
 <p className="content__subtitle slide-in-elliptic-top-fwd">We have found <strong>{totalResults}</strong> coincidences! {inputMovie}</p>
