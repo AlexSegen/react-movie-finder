@@ -24,7 +24,7 @@ export const Home = () => {
       <div>
         <MoviesList movies={results} totalResults={totalResults} inputMovie={inputMovie} />
         <hr/>
-        <Pagination totalResults={20}/>
+        <Pagination totalResults={totalResults}/>
       </div> 
   }
 
