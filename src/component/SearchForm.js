@@ -24,7 +24,7 @@ export const SearchForm = ({ onResults }) => {
         e.preventDefault()
         if (!inputMovie || inputMovie.toString().trim().length === 0)
             return
-        window.location.href = "/?s=" + inputMovie + "&page=" + (page ? page : 1);
+        window.location.href = "/?s=" + inputMovie + "&page=1";
     }
 
     const searchMovie = () => {
