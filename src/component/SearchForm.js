@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import dataService from '../services/data.service'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setLoading } from '../actions'
 
-export const SearchForm = props => {
+export const SearchForm = ({ onResults }) => {
+
+    const isLoading = useSelector(state => state.loading)
+    const dispatch = useDispatch()
+
     const [inputMovie, setInputMovie] = useState("");
-    const [isLoading, setLoading] = useState(false);
     const [hasErrors, setErrors] = useState(false);
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -24,15 +29,15 @@ export const SearchForm = props => {
 
     const searchMovie = () => {
         if (search) {
-            setLoading(true)
+            dispatch(setLoading(true))
             setErrors(false)
             dataService.searchMovies(search.trim(), page ? page : 1).then(data => {
                 const { Search = [], totalResults = "" } = data;
-                props.onResults({ Search, totalResults, inputMovie: search })
-                setLoading(false)
+                onResults({ Search, totalResults, inputMovie: search })
+                dispatch(setLoading(false))
             }).catch(error => {
                 console.log('Error: ', error)
-                setLoading(false)
+                dispatch(setLoading(false))
                 setErrors(true)
             })
         }
