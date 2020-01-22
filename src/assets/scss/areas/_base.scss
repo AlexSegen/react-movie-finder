@@ -24,27 +24,23 @@ body {
 }
 
 .MoviesList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   padding: 80px 15px 15px 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
 
   &-item {
-    width: 22.5%;
     margin-bottom: 75px;
-
-    @media (max-width: 767px) {
-      width: 33%;
-    }
-
-    @media (max-width: 650px) {
-      width: 45%;
-    }
-
-    @media (max-width: 420px) {
-      width: 90%;
-    }
   }
+
+  @media(max-width:768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media(max-width:520px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
 }
 
 .card {
