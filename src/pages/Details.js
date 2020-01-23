@@ -1,49 +1,64 @@
-/* eslint-disable no-const-assign */
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import { Spinner } from '../component/Spinner'
 import { Link } from 'react-router-dom'
 import dataService from '../services/data.service'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { setLoading } from '../actions'
 
 export const Details = props => {
 
     const [movie, setMovie] = useState({});
-    // eslint-disable-next-line no-unused-vars
-    const [isLoading, setLoading] = useState(false);
-    // eslint-disable-next-line no-unused-vars
+
+    const [actors, setActors] = useState([]);  
+
+    const isLoading = useSelector(state => state.loading)
+    const dispatch = useDispatch()
+
     const [hasErrors, setErrors] = useState(false);
 
     const getMovieDetails = id => {
-        setLoading(true)
+        dispatch(setLoading(true))
         setErrors(false)
         dataService.getMovie(id).then(res => {
             setMovie(res)
-            setLoading(false)
+            getActors(res.Actors)
+            dispatch(setLoading(false))
         }).catch(error => {
             console.log('Error: ', error)
-            setLoading(false)
+            dispatch(setLoading(false))
             setErrors(true)
         })
     }
 
+    const getActors = str => {
+        console.log('getActors', str)
+        let tmp = str ? str.split(",") : "";
+        setActors(tmp ? tmp : [])
+    }
+
     useEffect(() => {
         getMovieDetails(props.match.params.id);
-
-        return () => {
-
-        };
     }, [props.match.params.id]);
 
-    return (
+    return isLoading ? <Spinner/> : (
         <div className="content__details">
             <div className="details_media roll-in-blurred-left">
                 <img src={movie.Poster} className="media_photo" alt={movie.Title} />
             </div>
             <div className="details_body fade-in-top">
-                <div className="details_body-scores jello-horizontal">
-                    <div className="score">
-                        {movie.Metascore}
-                        <span>Score</span>
+                {
+                    movie.imdbRating && movie.imdbRating !== "N/A" &&
+                    <div className="details_body-scores jello-horizontal">
+                        <div className="score">
+                        { movie.imdbRating }
+                            <span>Score</span>
+                        </div>
                     </div>
-                </div>
+
+                }
+                
 
                 {
                     hasErrors ? <div className="field message is-danger">
@@ -66,6 +81,16 @@ export const Details = props => {
                         </ul> : null
                 }
                 <p className="details_body-plot">{movie.Plot}</p>
+                <br/>
+                <h4>Actors</h4>
+                <ul className="list-styled">
+                    {
+                        actors.map(actor => {
+                            return <li key={actor}>
+                                <i className="fa fa-chevron-right mr-1 text-primary"></i> {actor}</li>
+                        })
+                    }
+                </ul>
                 <div className="details_body-awards">
                     <i className="fa fa-trophy has-text-warning icon"></i> <span>{movie.Awards}</span>
                 </div>
