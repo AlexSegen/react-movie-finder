@@ -12,10 +12,14 @@ body {
 
 .app-name {
   text-align: center;
+  color: #010101;
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -1px;
   margin: 0 0 30px;
+  > a {
+    color: #010101;
+  }
 }
 
 .search-box {

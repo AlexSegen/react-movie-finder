@@ -13,7 +13,7 @@ export const Home = () => {
 
   const handleResults = data => {
     setResults(data.Search);
-    setUsedSearch(true);
+    setUsedSearch(data.isSearching);
     setInputMovie(data.inputMovie);
     setTotalResults(data.totalResults);
   }
@@ -22,7 +22,7 @@ export const Home = () => {
     return results && results.length === 0 ?
       <NotFound /> :
       <div>
-        <MoviesList movies={results} totalResults={totalResults} inputMovie={inputMovie} />
+        <MoviesList movies={results} totalResults={totalResults} inputMovie={inputMovie} isSearching={usedSearch} />
         <hr/>
         <Pagination totalResults={totalResults}/>
       </div> 

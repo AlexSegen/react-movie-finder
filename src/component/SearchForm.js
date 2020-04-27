@@ -40,14 +40,17 @@ export const SearchForm = ({ onResults }) => {
             setErrors(false)
             dataService.searchMovies(search.trim(), page ? page : 1).then(data => {
                 const { Search = [], totalResults = "" } = data;
-                onResults({ Search, totalResults, inputMovie: search })
+                onResults({ Search, totalResults, inputMovie: search, isSearching: true })
                 dispatch(setLoading(false))
             }).catch(error => {
                 console.log('Error: ', error)
                 dispatch(setLoading(false))
                 setErrors(true)
             })
+            return;
         }
+
+        onResults({ Search: [], totalResults: 0, inputMovie: null, isSearching: false })
 
     }
 
