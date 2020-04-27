@@ -70,17 +70,17 @@ export const SearchForm = ({ onResults }) => {
                         placeholder="Find a movie" />
                 </div>
                 <div className="control">
-                    <button className={`button is-info is-search ${isLoading ? "is-loading" : ""}`}>
+                    <button className={`button is-info is-search ${isLoading && "is-loading"}`}>
                         Search
                     </button>
                 </div>
             </div>
             {
-                hasErrors ? <div className="field message is-danger">
+                hasErrors && <div className="field message is-danger">
                     <div className="message-body has-text-centered">
                         Oops, please try again!
-                                        </div>
-                </div> : null
+                    </div>
+                </div>
             }
 
         </form>
