@@ -11,12 +11,12 @@ export const MoviesList = ({ movies, totalResults, inputMovie }) => {
 
     return isLoading ? <Spinner/> : (
             <div className="content__result-row">
-<p className="content__subtitle slide-in-elliptic-top-fwd">We have found <strong>{totalResults}</strong> coincidences! {inputMovie}</p>
+<p className="content__subtitle slide-in-elliptic-top-fwd">We have found <strong>{totalResults}</strong> coincidences for {inputMovie}!</p>
                 <div className="MoviesList">
                     {
-                        movies.map(movie => {
+                        movies.map((movie, index) => {
                             return (
-                                <div key={movie.imdbID} className="MoviesList-item">
+                                <div key={movie.imdbID + '-' + index} className="MoviesList-item">
                                     <Movie
                                     id={movie.imdbID}
                                     title={movie.Title}

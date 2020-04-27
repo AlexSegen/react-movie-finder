@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import {useHistory} from 'react-router-dom';
 
 export const Pagination = ({ totalResults }) => {
 
     const [totalPages, setTotalPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const history = useHistory()
 
     const urlParams = new URLSearchParams(window.location.search);
     const search = urlParams.get('s');
@@ -23,7 +26,9 @@ export const Pagination = ({ totalResults }) => {
 
     const goToPage = page => {
         if (page > totalPages.length || page <= 0) return;
-        window.location.href = "/?s=" + search + "&page=" + (page ? page : 1);
+
+        history.push("/?s=" + search + "&page=" + (page ? page : 1))
+        //window.location.href = "/?s=" + search + "&page=" + (page ? page : 1);
     };
 
     useEffect(() => {

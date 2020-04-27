@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-export const Movie = props => {
-
-
-    const { id, title, poster, year } = props;
+export const Movie = ({ id, title, poster, year }) => {
 
     return (
         <Link to={`/details/${id}`}

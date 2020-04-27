@@ -1,24 +1,27 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from "react-router-dom";
 import { Spinner } from '../component/Spinner'
-import { Link } from 'react-router-dom'
 import dataService from '../services/data.service'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setLoading } from '../actions'
 
-export const Details = props => {
+export const Details = () => {
 
     const [movie, setMovie] = useState({});
 
     const [actors, setActors] = useState([]);  
+
+    const { id } = useParams();
+    const history = useHistory();
 
     const isLoading = useSelector(state => state.loading)
     const dispatch = useDispatch()
 
     const [hasErrors, setErrors] = useState(false);
 
-    const getMovieDetails = id => {
+    const getMovieDetails = () => {
         dispatch(setLoading(true))
         setErrors(false)
         dataService.getMovie(id).then(res => {
@@ -33,14 +36,17 @@ export const Details = props => {
     }
 
     const getActors = str => {
-        console.log('getActors', str)
         let tmp = str ? str.split(",") : "";
         setActors(tmp ? tmp : [])
     }
 
+    const goHome = () => {
+        history.goBack()
+    }
+
     useEffect(() => {
-        getMovieDetails(props.match.params.id);
-    }, [props.match.params.id]);
+        getMovieDetails();
+    }, []);
 
     return isLoading ? <Spinner/> : (
         <div className="content__details">
@@ -61,24 +67,25 @@ export const Details = props => {
                 
 
                 {
-                    hasErrors ? <div className="field message is-danger">
+                    hasErrors && 
+                    <div className="field message is-danger">
                         <div className="message-body has-text-centered">
                             Oops, please try again!
-                                        </div>
-                    </div> : null
+                        </div>
+                    </div> 
                 }
 
                 <h2 className="details_body-title">{movie.Title} <br />
                     <small> Genre: {movie.Genre} | Year: {movie.Year}</small></h2>
                 {
-                    movie.Ratings ?
-                        <ul className="details_body-rating">
-                            {
-                                movie.Ratings.map(r => {
-                                    return <li key={r.Value}><strong>{r.Source}:</strong> {r.Value}</li>
-                                })
-                            }
-                        </ul> : null
+                    movie.Ratings &&
+                    <ul className="details_body-rating">
+                        {
+                            movie.Ratings.map(r => {
+                                return <li key={r.Value}><strong>{r.Source}:</strong> {r.Value}</li>
+                            })
+                        }
+                    </ul>
                 }
                 <p className="details_body-plot">{movie.Plot}</p>
                 <br/>
@@ -95,7 +102,7 @@ export const Details = props => {
                     <i className="fa fa-trophy has-text-warning icon"></i> <span>{movie.Awards}</span>
                 </div>
                 <hr />
-                <Link to="/" className="button is-default" >Go back</Link>
+                <button onClick={goHome} className="button is-default">Go back</button>
             </div>
 
         </div>

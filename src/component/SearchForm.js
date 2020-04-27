@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import dataService from '../services/data.service'
-
+import {useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { setLoading } from '../actions'
 
+import dataService from '../services/data.service'
+
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+}
+
 export const SearchForm = ({ onResults }) => {
+
+    const query = useQuery();
+    const history = useHistory()
 
     const isLoading = useSelector(state => state.loading)
     const dispatch = useDispatch()
@@ -12,9 +20,8 @@ export const SearchForm = ({ onResults }) => {
     const [inputMovie, setInputMovie] = useState("");
     const [hasErrors, setErrors] = useState(false);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const search = urlParams.get('s');
-    const page = urlParams.get('page');
+    const search = query.get('s');
+    const page = query.get('page');
 
     const handleChange = e => {
         setInputMovie(e.target.value)
@@ -24,7 +31,7 @@ export const SearchForm = ({ onResults }) => {
         e.preventDefault()
         if (!inputMovie || inputMovie.toString().trim().length === 0)
             return
-        window.location.href = "/?s=" + inputMovie + "&page=1";
+        history.push("/?s=" + inputMovie + "&page=1")
     }
 
     const searchMovie = () => {
@@ -47,7 +54,7 @@ export const SearchForm = ({ onResults }) => {
     useEffect(() => {
         searchMovie()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [search, page])
 
     return (
         <form onSubmit={handleSubmit}>
